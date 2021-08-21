@@ -3,7 +3,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import { useGlobalContext } from './context';
 
 const Stories = () => {
-  const {isLoading} = useGlobalContext();
+  const {isLoading,hits} = useGlobalContext();
 
   if(isLoading) {
     return (
@@ -15,7 +15,22 @@ const Stories = () => {
     )
   }
   return (
-    <h2>stories component</h2>
+    <section>
+      {hits.map((story) => {
+        console.log(story);
+        const {objectID,title,num_comments,url,points,author} = story
+        return <article key={objectID}>
+          <h4>{title}</h4>
+          <p>{points} points by <span>{author} | </span>{num_comments}{''} comments</p>
+          <div>
+            <a href={url} target="_blank">
+              read more
+            </a>
+            <button>remove</button>
+          </div>
+        </article>
+      })}
+    </section>
   )
 }
 
