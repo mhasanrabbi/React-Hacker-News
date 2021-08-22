@@ -3,7 +3,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import { useGlobalContext } from './context';
 
 const Stories = () => {
-  const {isLoading,hits} = useGlobalContext();
+  const {isLoading,hits,removeStory} = useGlobalContext();
 
   if(isLoading) {
     return (
@@ -26,7 +26,7 @@ const Stories = () => {
             <a href={url} target="_blank">
               read more
             </a>
-            <button>remove</button>
+            <button onClick={() => removeStory(objectID)}>remove</button>
           </div>
         </article>
       })}

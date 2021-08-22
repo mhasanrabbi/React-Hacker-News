@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
 import {
+  REMOVE_STORY,
   SET_LOADING,
   SET_STORIES
 } from './actions';
@@ -35,12 +36,16 @@ const AppProvider = ({ children }) => {
     }
   }
 
+  const removeStory = (id) => {
+    dispatch({ type: REMOVE_STORY, payload: id})
+  }
+
   useEffect(() => {
     fetchStories(`${API_ENDPOINT}query=${state.query}&page=${state.page}`)
   }, [])
 
   return (
-    <AppContext.Provider value={{...state}}>
+    <AppContext.Provider value={{...state, removeStory}}>
       {children}
     </AppContext.Provider>
   )
