@@ -1,19 +1,26 @@
 import React from 'react';
+import { Button, Col, Row } from 'react-bootstrap';
 import { useGlobalContext } from './context';
 
 const Buttons = () => {
   const {isLoading,page,nbPages,handlePage} = useGlobalContext();
 
   return (
-    <div>
-      <button disabled={isLoading} onClick={() => handlePage('decrease')}>
+    <Row xs="auto" className="btn-container">
+    <Col >
+      <Button variant="dark" size="sm" disabled={isLoading} onClick={() => handlePage('decrease')}>
         prev
-      </button>
+      </Button>
+    </Col>
+    <Col>
       <p>{page + 1} of {nbPages}</p>
-      <button disabled={isLoading} onClick={() => handlePage('increase')}>
+    </Col>
+    <Col>
+      <Button variant="dark" size="sm" disabled={isLoading} onClick={() => handlePage('increase')}>
         next
-      </button>
-    </div>
+      </Button>
+    </Col>
+    </Row>
   )
 }
 

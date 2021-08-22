@@ -1,5 +1,5 @@
 import React from 'react';
-import Spinner from 'react-bootstrap/Spinner';
+import { Button, Card, Col, Container, Row, Spinner } from 'react-bootstrap';
 import { useGlobalContext } from './context';
 
 const Stories = () => {
@@ -14,22 +14,29 @@ const Stories = () => {
       </div>
     )
   }
+  
   return (
-    <section>
+    <Container fluid="md">
+      <Row md={1} lg={2} className="g-4 grid-container">
       {hits.map((story) => {
         const {objectID,title,num_comments,url,points,author} = story
-        return <article key={objectID}>
-          <h4>{title}</h4>
-          <p>{points} points by <span>{author} | </span>{num_comments}{''} comments</p>
-          <div>
-            <a href={url} target="_blank">
-              read more
-            </a>
-            <button onClick={() => removeStory(objectID)}>remove</button>
-          </div>
-        </article>
+        return(
+          <Col key={objectID}>
+          <Card  style={{ width: '38rem'}}>
+          <Card.Body>
+          <Card.Title>{title}</Card.Title>
+          <Card.Subtitle className="mb-2 text-muted">{points} points by {author} | {num_comments}{''} comments</Card.Subtitle>
+          <Card.Link href={url} target="_blank">Read More</Card.Link>
+          <Card.Link>
+            <Button size="sm" variant="danger" onClick={() => removeStory(objectID)}>remove</Button>
+          </Card.Link>
+          </Card.Body>
+        </Card>
+        </Col>
+        )
       })}
-    </section>
+      </Row>
+    </Container>
   )
 }
 

@@ -1,6 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'IBM Plex Sans Thai', sans-serif;
+}
+
 .loading {
   width: 6rem;
   height: 6rem;
   margin: 0 auto;
   margin-top: 10rem;
+}
+
+/* Search */
+
+.search-form {
+  width: 90vw;
+  max-width: 1170px;
+  margin: 0 auto;
+  margin-top: 5rem;
+  margin-bottom: 3rem;
+}
+
+.form-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  border-bottom: 3px solid grey;
+  max-width: 600px;
+  background: transparent;
+  padding: 1rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  margin-top: 1rem;
+  letter-spacing: 2px;
+}
+
+/* ================== */
+
+.btn-container {
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.btn-container p {
+  margin: 0;
+}
+
+.btn-container button:disabled {
+  cursor: not-allowed;
+}
+
+.grid-container {
+  justify-content: center;
+  align-items: center;
 }
