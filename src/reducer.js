@@ -1,4 +1,5 @@
 import {
+  HANDLE_PAGE,
   HANDLE_SEARCH,
   REMOVE_STORY,
   SET_LOADING,
@@ -22,6 +23,24 @@ const reducer = (state,action) => {
   }
   if (action.type === HANDLE_SEARCH) {
     return {...state, query:action.payload, page:0}
+  }
+  if (action.type === HANDLE_PAGE) {
+    if (action.payload === 'increase') {
+      let nextPage = state.page + 1
+      if(nextPage > state.nbPages - 1){
+        nextPage = 0
+      }
+      return {...state,page:nextPage}
+    }
+  }
+  if (action.type === HANDLE_PAGE) {
+    if (action.payload === 'decrease') {
+      let prevPage = state.page - 1
+      if(prevPage < 0){
+        prevPage = state.nbPages - 1
+      }
+      return {...state,page:prevPage}
+    }
   }
   throw new Error (`no matching "${action.type}" action type`)
 }

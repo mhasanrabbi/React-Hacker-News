@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useEffect, useReducer } from 'react';
+import React, { createContext, useContext, useEffect, useReducer, useState } from 'react';
 import {
+  HANDLE_PAGE,
   HANDLE_SEARCH,
   REMOVE_STORY,
   SET_LOADING,
@@ -20,6 +21,7 @@ const initialState = {
 const AppContext = createContext()
 
 const AppProvider = ({ children }) => {
+  const [page, setPage] = useState(0);
   const [state,dispatch] = useReducer(reducer,initialState);
 
   const fetchStories = async (url) => {
@@ -31,7 +33,6 @@ const AppProvider = ({ children }) => {
         type:SET_STORIES,
         payload:{hits:data.hits,nbPages:data.nbPages
       }})
-      console.log(data)
     } catch (error) {
       console.log(error)
     }
@@ -45,12 +46,16 @@ const AppProvider = ({ children }) => {
     dispatch({type: HANDLE_SEARCH, payload:query})
   }
 
+  const handlePage = (value) => {
+    dispatch({type:HANDLE_PAGE, payload:value})
+  }
+
   useEffect(() => {
     fetchStories(`${API_ENDPOINT}query=${state.query}&page=${state.page}`)
-  }, [state.query])
+  }, [state.query, state.page])
 
   return (
-    <AppContext.Provider value={{...state, removeStory, handleSearch}}>
+    <AppContext.Provider value={{...state, removeStory, handleSearch, handlePage}}>
       {children}
     </AppContext.Provider>
   )
