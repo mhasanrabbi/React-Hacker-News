@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useReducer, useState } from 'react';
+import React, { createContext, useContext, useEffect, useReducer } from 'react';
 import {
   HANDLE_PAGE,
   HANDLE_SEARCH,
@@ -21,7 +21,6 @@ const initialState = {
 const AppContext = createContext()
 
 const AppProvider = ({ children }) => {
-  const [page, setPage] = useState(0);
   const [state,dispatch] = useReducer(reducer,initialState);
 
   const fetchStories = async (url) => {
